@@ -5,7 +5,6 @@ import android.util.Log;
 
 import androidx.activity.ComponentActivity;
 import androidx.compose.ui.platform.ComposeView;
-import static com.example.hello_world.MainViewKt.configureContentView;
 
 import com.example.hello_world.features.todo.TodoService;
 
@@ -15,6 +14,9 @@ import dagger.hilt.android.AndroidEntryPoint;
 
 @AndroidEntryPoint
 public class MainActivity extends ComponentActivity {
+
+    @Inject
+    MainView mainView;
 
     @Inject
     TodoService todoService;
@@ -32,7 +34,7 @@ public class MainActivity extends ComponentActivity {
         super.onCreate(savedInstanceState);
         //enableEdgeToEdge()
         var view = new ComposeView(this);
-        configureContentView(view);
+        mainView.configureContentView(view);
         setContentView(view);
         Log.i(TAG, String.format("im onCreate %s %d", model.greeting, model.count));
 
