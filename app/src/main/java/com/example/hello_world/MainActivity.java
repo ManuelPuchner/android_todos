@@ -39,7 +39,7 @@ public class MainActivity extends ComponentActivity {
         Log.i(TAG, String.format("im onCreate %s %d", model.greeting, model.count));
 
         store.subject.subscribe(model -> {
-            Log.d(TAG, String.format("Todos recieved %d",model.todos.size()));
+            Log.d(TAG, String.format("Todos recieved %d",model.todos.length));
         });
 
         todoService.getAll();

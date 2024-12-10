@@ -8,6 +8,6 @@ import jakarta.ws.rs.Path;
 @Path("/todos")
 public interface TodoClient {
     @GET
-    List<Todo> getAll();
+    Todo[] getAll();
 
 }

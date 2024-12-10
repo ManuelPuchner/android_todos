@@ -18,6 +18,7 @@ import com.example.hello_world.ui.theme.HelloworldTheme
 import java.util.Arrays
 import javax.inject.Inject
 import javax.inject.Singleton
+import androidx.compose.foundation.lazy.items
 
 @Singleton
 class MainView @Inject constructor(){
@@ -56,6 +57,7 @@ fun Greeting(name: String, modifier: Modifier = Modifier, store: Store) {
 
 @Composable
 fun ToDoRow(toDo: Todo) {
+
     Row(modifier = Modifier.padding(4.dp)) {
         Text(toDo.id.toString(), modifier = Modifier.padding(horizontal = 6.dp))
         Text(text = toDo.title, overflow = TextOverflow.Ellipsis, maxLines = 1)

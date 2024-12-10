@@ -27,12 +27,23 @@ public class TodoService {
     }
 
     public void getAll() {
+
+
         CompletableFuture
-                .supplyAsync(todoClient::getAll)
+                .supplyAsync(() -> {
+                    Todo[] todos = null;
+                    try {
+                        todos = todoClient.getAll();
+                    } catch(Exception e) {
+                        Log.e(TAG, e.getMessage());
+                    }
+
+                    return todos;
+                })
                 .thenAccept(todos -> {
                     var model = new Model();
                     model.todos = todos;
-
+                    Log.d(TAG,String.format("Todos loaded %d",todos.length));
                     store.subject.onNext(model);
                 });
     }
