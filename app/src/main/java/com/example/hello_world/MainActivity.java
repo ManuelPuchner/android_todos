@@ -7,13 +7,22 @@ import androidx.activity.ComponentActivity;
 import androidx.compose.ui.platform.ComposeView;
 import static com.example.hello_world.MainViewKt.configureContentView;
 
+import com.example.hello_world.features.todo.TodoService;
+
 import javax.inject.Inject;
 
 import dagger.hilt.android.AndroidEntryPoint;
 
 @AndroidEntryPoint
 public class MainActivity extends ComponentActivity {
+
+    @Inject
+    TodoService todoService;
+
     private static final String TAG = MainActivity.class.getSimpleName();
+
+    @Inject
+    Store store;
 
     @Inject
     Model model;
@@ -26,6 +35,12 @@ public class MainActivity extends ComponentActivity {
         configureContentView(view);
         setContentView(view);
         Log.i(TAG, String.format("im onCreate %s %d", model.greeting, model.count));
+
+        store.subject.subscribe(model -> {
+            Log.d(TAG, String.format("Todos recieved %d",model.todos.size()));
+        });
+
+        todoService.getAll();
     }
 
 
